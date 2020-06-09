@@ -9,6 +9,7 @@ class authint(QtWidgets.QMainWindow):
         self.ui = authUI.Ui_MainWindow(); 
         self.ui.setupUi(self)
         self.ui.startButton.clicked.connect(self.storeValues)
+        self.show()
         
     def storeValues(self):
         login = self.ui.loginLine.text()
@@ -29,3 +30,5 @@ class authint(QtWidgets.QMainWindow):
         userDict = {"number":login,"password":password}
         json.dump(userDict, f)
         f.close()
+        self.close()
+        

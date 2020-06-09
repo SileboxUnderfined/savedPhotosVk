@@ -11,7 +11,7 @@ def auth(user, somewin):
         user[0],
         user[1],
         auth_handler=auth_handler,
-        captcha_handler=captcha_handler
+        captcha_handler=captcha_hanlder
     )
     try:
         vk_session.auth()
