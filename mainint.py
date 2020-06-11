@@ -11,7 +11,7 @@ class mainWind(QtWidgets.QMainWindow):
         super(mainWind, self).__init__()
         self.ui = mainWin.Ui_MainWindow()
         self.ui.setupUi(self)
-        self.ui.startButton.clicked.connect(self.start)
+        self.ui.startButton.clicked.connect(self.mainCycle)
         self.ui.aboutProgButton.clicked.connect(self.about)
         self.initUser()
         self.userScreen()
@@ -30,36 +30,31 @@ class mainWind(QtWidgets.QMainWindow):
         name = thisUser[0]['first_name']
         surname = thisUser[0]['last_name']
         self.ui.greetingsLabel.setText("Приветствую тебя, {name} {surname}".format(name=name,surname=surname))
-        
-    def start(self):
-        self.ui.progressBarLabel.setText(percentOfVl + "получение основной информации...")
-        
-
-        
-        self.mncl = mainCycle(vk=self.vk,win=self)
-        self.mncl.start()
-        self.mncl.wait()
-        
-
-        
-        self.ui.progressBarLabel.setText(percentOfVl + "готово...")
-
     
-    """def mainCycle(self):
-        self.albumCreate()
+    def mainCycle(self):
+        self.ui.progressBarLabel.setText(percentOfVl + "получение основной информации...")
+        self.ui.chooseCountSpinBox.setEnabled(False)
+        self.ui.startButton.setEnabled(False)
         self.howMPhots = 0
         self.fullyAmmountOfPhotos = self.ui.chooseCountSpinBox.value() / 100
         self.countOfCycles = int(self.ui.chooseCountSpinBox.value() / 50)
+        self.remainderC = self.ui.chooseCountSpinBox.value() % 50
+        if (self.remainderC > 0) or (self.remainderC < 0) or (self.countOfCycles == 0):
+            self.ui.chooseCountSpinBox.setEnabled(True)
+            self.ui.startButton.setEnabled(True)
+            self.ui.progressBarLabel.setText(percentOfVl + "ошибка: вы выбрали не то число...")
+            return
+            
+        self.albumCreate()
+        
         for i in range(self.countOfCycles):
             self.getPhotos()
-            self.photoMove()"""
+            self.photoMove()
             
     def photoMove(self):
         self.phmv = working.movePhoto(win=self,vk=self.vk,phids=self.photosList,albid=self.albumNeeded,parent=self)
         self.phmv.start()
         
-        
-    
     def albumCreate(self):
         self.albumNeeded = 0
         self.titleOfAlbum = "SavedPhotos"
@@ -85,48 +80,3 @@ class mainWind(QtWidgets.QMainWindow):
     def about(self):
         pass
         
-
-class mainCycle(QThread):
-    def __init__(self,vk,win):
-        super().__init__()
-        self.titleOfAlbum = "SavedPhotos"
-        self.vk = vk
-        self.win = win
-        self.win.ui.chooseCountSpinBox.setEnabled(False)
-        self.win.ui.startButton.setEnabled(False)
-        
-    def run(self):
-        self.albumCreate()
-        self.howMPhots = 0
-        self.fullyAmmountOfPhotos = self.win.ui.chooseCountSpinBox.value() / 100
-        self.countOfCycles = int(self.win.ui.chooseCountSpinBox.value() / 50)
-        for i in range(self.countOfCycles):
-            self.getPhotos()
-            self.photoMove()
-        
-        self.win.ui.chooseCountSpinBox.setEnabled(True)
-        self.win.ui.startButton.setEnabled(True)
-    
-    def albumCreate(self):
-        self.albumNeeded = 0
-        self.titleOfAlbum = "SavedPhotos"
-        self.allAlbums = self.vk.photos.getAlbums()
-        self.allAlbums = self.allAlbums['items']
-        for i in self.allAlbums:
-            if i['title'] == self.titleOfAlbum:
-                self.albumNeeded = i['id']
-                print(i['title'])
-                break
-        if self.albumNeeded == "":
-            self.vk.photos.createAlbum(title=self.titleOfAlbum)
-    
-    
-    def getPhotos(self):
-        self.photosList = list()
-        allPhotos = self.vk.photos.get(album_id="saved")
-        for i in allPhotos['items']:
-            self.photosList.append(i['id'])
-    
-    def photoMove(self):
-        self.phmv = working.movePhoto(win=self,vk=self.vk,phids=self.photosList,albid=self.albumNeeded,parent=self)
-        self.phmv.start()
