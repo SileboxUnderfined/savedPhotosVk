@@ -5,6 +5,7 @@ import sys, os
 
 def main():
     app = QtWidgets.QApplication([])
+    app.setStyle("Fusion")
     application = None
     if os.path.isfile("vkscript/settings.json") == False:
         application = authint.authint()

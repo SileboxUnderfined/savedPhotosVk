@@ -35,6 +35,7 @@ class mainWind(QtWidgets.QMainWindow):
         self.ui.progressBarLabel.setText(percentOfVl + "получение основной информации...")
         self.ui.chooseCountSpinBox.setEnabled(False)
         self.ui.startButton.setEnabled(False)
+        self.ui.aboutProgButton.setEnabled(False)
         self.howMPhots = 0
         self.fullyAmmountOfPhotos = self.ui.chooseCountSpinBox.value() / 100
         self.countOfCycles = int(self.ui.chooseCountSpinBox.value() / 50)
@@ -50,10 +51,19 @@ class mainWind(QtWidgets.QMainWindow):
         for i in range(self.countOfCycles):
             self.getPhotos()
             self.photoMove()
+        
+        self.ui.chooseCountSpinBox.setEnabled(True)
+        self.ui.startButton.setEnabled(True)
+        self.ui.aboutProgButton.setEnabled(True)
+        self.ui.progressBarLabel.setText(percentOfVl + "готово...")  
             
     def photoMove(self):
         self.phmv = working.movePhoto(win=self,vk=self.vk,phids=self.photosList,albid=self.albumNeeded,parent=self)
         self.phmv.start()
+        while self.phmv.isFinished() == False:
+            pass
+            
+        self.phmv.exit()
         
     def albumCreate(self):
         self.albumNeeded = 0

@@ -20,6 +20,3 @@ class movePhoto(QThread):
             self.vk.photos.move(photo_id=self.phids[i], target_album_id=self.albid)
             self.mainwindow.ui.progressBar.setValue(self.mainwindow.ui.progressBar.value() + 1)
         
-        self.mainwindow.ui.chooseCountSpinBox.setEnabled(True)
-        self.mainwindow.ui.startButton.setEnabled(True)
-        self.mainwindow.ui.progressBarLabel.setText(percentOfVl + "готово...")
