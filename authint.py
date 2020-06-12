@@ -26,7 +26,7 @@ class authint(QtWidgets.QMainWindow):
             return
         
         print(result)
-        f = open('vkscript/settings.json','w')
+        f = open('settings.json','w')
         userDict = {"number":login,"password":password}
         json.dump(userDict, f)
         f.close()

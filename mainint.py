@@ -1,4 +1,4 @@
-import PyQt5, json
+import PyQt5, json, os
 from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import QThread
 from uiFiles import mainWin
@@ -13,12 +13,13 @@ class mainWind(QtWidgets.QMainWindow):
         self.ui.setupUi(self)
         self.ui.startButton.clicked.connect(self.mainCycle)
         self.ui.aboutProgButton.clicked.connect(self.about)
+        self.ui.outlogButton.clicked.connect(self.outlog)
         self.initUser()
         self.userScreen()
         self.show()
         
     def initUser(self):
-        f = open('vkscript/settings.json','r')
+        f = open('settings.json','r')
         userFromSettings = json.load(f)
         number = userFromSettings['number']
         password = userFromSettings['password']
@@ -55,6 +56,7 @@ class mainWind(QtWidgets.QMainWindow):
         self.ui.chooseCountSpinBox.setEnabled(True)
         self.ui.startButton.setEnabled(True)
         self.ui.aboutProgButton.setEnabled(True)
+        self.ui.outlogButton.setEnabled(False)
         self.ui.progressBarLabel.setText(percentOfVl + "готово...")  
             
     def photoMove(self):
@@ -89,4 +91,8 @@ class mainWind(QtWidgets.QMainWindow):
      
     def about(self):
         pass
-        
+    
+    def outlog(self):
+        os.remove('settings.json')
+        QtWidgets.QMessageBox.question(self, "Разлогинились","разлогинились успешно",QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
+        self.close()
