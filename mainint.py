@@ -37,6 +37,7 @@ class mainWind(QtWidgets.QMainWindow):
         self.ui.chooseCountSpinBox.setEnabled(False)
         self.ui.startButton.setEnabled(False)
         self.ui.aboutProgButton.setEnabled(False)
+        self.ui.outlogButton.setEnabled(False)
         self.howMPhots = 0
         self.fullyAmmountOfPhotos = self.ui.chooseCountSpinBox.value() / 100
         self.countOfCycles = int(self.ui.chooseCountSpinBox.value() / 50)
@@ -56,7 +57,7 @@ class mainWind(QtWidgets.QMainWindow):
         self.ui.chooseCountSpinBox.setEnabled(True)
         self.ui.startButton.setEnabled(True)
         self.ui.aboutProgButton.setEnabled(True)
-        self.ui.outlogButton.setEnabled(False)
+        self.ui.outlogButton.setEnabled(True)
         self.ui.progressBarLabel.setText(percentOfVl + "готово...")  
             
     def photoMove(self):
