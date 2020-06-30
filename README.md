@@ -13,17 +13,10 @@
 2. Программа не создаёт альбом самостоятельно
 3. Вы не можете сами выбрать нужный вам альбом
 
-### Установка:
-#### Для Windows: 
+### Установка: 
 1. Скачайте [main.exe](https://github.com/SileboxUnderfined/savedPhotosVk/raw/master/main.exe)
 2. запустите
 
-#### Для Linux/Mac OS X:
-1. скачайте programm.zip
-2. Распакуйте
-3. войдите в терминал
-4. пропишите **cd [путь_к_папке]**
-5. пропишите **python3 main.py**
-
 ### Ссылки:
 1. [EXE файл](https://github.com/SileboxUnderfined/savedPhotosVk/raw/master/main.exe)
+2. По всем вопросам - [ВК](https://vk.com/vmegrikyan99), ник в телеграме - **Silebox**, адрес электронной почты - **silebox22@gmail.com**
