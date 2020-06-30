@@ -15,7 +15,7 @@
 
 ### Установка:
 #### Для Windows: 
-1. Скачайте [main.exe](https://github.com/SileboxUnderfined/savedPhotosVk/main.exe)
+1. Скачайте [main.exe](https://github.com/SileboxUnderfined/savedPhotosVk/raw/master/main.exe)
 2. запустите
 
 #### Для Linux/Mac OS X:
@@ -26,4 +26,4 @@
 5. пропишите **python3 main.py**
 
 ### Ссылки:
-1. [EXE файл](https://github.com/SileboxUnderfined/savedPhotosVk/main.exe)
+1. [EXE файл](https://github.com/SileboxUnderfined/savedPhotosVk/raw/master/main.exe)
